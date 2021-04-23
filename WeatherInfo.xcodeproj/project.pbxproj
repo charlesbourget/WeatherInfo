@@ -12,7 +12,6 @@
 		560815B526321F270014A5ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 560815B426321F270014A5ED /* Assets.xcassets */; };
 		560815B826321F270014A5ED /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 560815B726321F270014A5ED /* Preview Assets.xcassets */; };
 		560815BB26321F270014A5ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560815B926321F270014A5ED /* Main.storyboard */; };
-		560815D1263280DC0014A5ED /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560815D0263280DC0014A5ED /* Configuration.swift */; };
 		560815DC26330DAF0014A5ED /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 560815DB26330DAF0014A5ED /* Config.plist */; };
 /* End PBXBuildFile section */
 
@@ -25,7 +24,6 @@
 		560815BA26321F270014A5ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		560815BC26321F270014A5ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		560815BD26321F270014A5ED /* WeatherInfo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherInfo.entitlements; sourceTree = "<group>"; };
-		560815D0263280DC0014A5ED /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		560815DB26330DAF0014A5ED /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,7 +59,6 @@
 			children = (
 				560815B026321F260014A5ED /* AppDelegate.swift */,
 				560815B226321F260014A5ED /* ContentView.swift */,
-				560815D0263280DC0014A5ED /* Configuration.swift */,
 				560815B426321F270014A5ED /* Assets.xcassets */,
 				560815B926321F270014A5ED /* Main.storyboard */,
 				560815BC26321F270014A5ED /* Info.plist */,
@@ -155,7 +152,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				560815D1263280DC0014A5ED /* Configuration.swift in Sources */,
 				560815B326321F260014A5ED /* ContentView.swift in Sources */,
 				560815B126321F260014A5ED /* AppDelegate.swift in Sources */,
 			);
