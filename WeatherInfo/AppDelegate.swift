@@ -3,11 +3,11 @@ import SwiftUI
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-
+    
     var popover: NSPopover!
     var statusBarItem: NSStatusItem!
     var apiKey: String!
-
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let buttonTitle = "⛅️ -- ℃"
         
@@ -34,7 +34,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         refreshWeatherData()
         let interval = 1200.0
         Timer.scheduledTimer(timeInterval: interval, target: self,  selector: #selector(refreshWeatherData), userInfo: nil, repeats: true)
-        
     }
     
     @objc func togglePopover(_ sender: AnyObject?) {
@@ -109,7 +108,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         task.resume()
     }
-
+    
     struct WeatherResponse: Decodable {
         struct MainData: Decodable {
             let temp: Double
@@ -133,6 +132,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         return configDict
     }
-
+    
 }
 
