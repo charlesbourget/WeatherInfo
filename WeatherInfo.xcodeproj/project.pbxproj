@@ -13,6 +13,7 @@
 		560815B826321F270014A5ED /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 560815B726321F270014A5ED /* Preview Assets.xcassets */; };
 		560815BB26321F270014A5ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560815B926321F270014A5ED /* Main.storyboard */; };
 		560815D1263280DC0014A5ED /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560815D0263280DC0014A5ED /* Configuration.swift */; };
+		560815DC26330DAF0014A5ED /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 560815DB26330DAF0014A5ED /* Config.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		560815BC26321F270014A5ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		560815BD26321F270014A5ED /* WeatherInfo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherInfo.entitlements; sourceTree = "<group>"; };
 		560815D0263280DC0014A5ED /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		560815DB26330DAF0014A5ED /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				560815B426321F270014A5ED /* Assets.xcassets */,
 				560815B926321F270014A5ED /* Main.storyboard */,
 				560815BC26321F270014A5ED /* Info.plist */,
+				560815DB26330DAF0014A5ED /* Config.plist */,
 				560815BD26321F270014A5ED /* WeatherInfo.entitlements */,
 				560815B626321F270014A5ED /* Preview Content */,
 			);
@@ -138,6 +141,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				560815DC26330DAF0014A5ED /* Config.plist in Resources */,
 				560815BB26321F270014A5ED /* Main.storyboard in Resources */,
 				560815B826321F270014A5ED /* Preview Assets.xcassets in Resources */,
 				560815B526321F270014A5ED /* Assets.xcassets in Resources */,

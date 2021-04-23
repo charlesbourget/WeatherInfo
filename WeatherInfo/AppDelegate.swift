@@ -6,7 +6,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var popover: NSPopover!
     var statusBarItem: NSStatusItem!
-
+    var apiKey: String!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let buttonTitle = "⛅️ -- ℃"
@@ -24,6 +24,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let button = self.statusBarItem.button {
             button.title = buttonTitle
             button.action = #selector(togglePopover(_:))
+        }
+        
+        if let config = readConfig() {
+            self.apiKey = config["ApiKey"]
         }
         
         // Force initial fetch of weather and then fetch each 20min
@@ -52,18 +56,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func refreshWeatherData() {
-        let apiKey = ""
         let city = "montreal"
-        let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(apiKey)&units=metric")!
+        let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(self.apiKey!)&units=metric")!
         
         let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
             if let error = error {
-                print("Error with fetching films: \(error)")
+                print("Error with fetching weather from API: \(error)")
                 return
             }
             
             guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                print("Error with the response, unexpected status codeL \(response!)")
+                print("Error with the response, unexpected status code: \(response!)")
                 return
             }
             
@@ -84,6 +87,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         let main: MainData
+    }
+    
+    func readConfig() -> Dictionary<String, String>? {
+        var configDict: Dictionary<String, String>?
+        if  let path = Bundle.main.path(forResource: "Config", ofType: "plist") {
+            if let dict = NSDictionary(contentsOfFile: path) as? Dictionary<String, String> {
+                configDict = dict
+            }
+        }
+        
+        return configDict
     }
 
 }
