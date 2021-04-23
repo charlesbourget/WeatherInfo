@@ -48,9 +48,38 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    func updateButton(currentWeather: WeatherData) {
+    func updateButton(currentWeather: WeatherResponse) {
         if let button = self.statusBarItem.button {
-            button.title  = "⛅️ \(currentWeather.main.temp) ℃"
+            let condition: String
+            switch currentWeather.weather[0].id {
+            case (200...299):
+                condition = "⛈"
+                break
+            case (300...399):
+                condition = "🌦"
+                break
+            case 511:
+                condition = "🧊"
+                break
+            case (500...599):
+                condition = "🌧"
+                break
+            case (600...699):
+                condition = "❄️"
+                break
+            case (700...799):
+                condition = "🌫"
+                break
+            case 800:
+                condition = "☀️"
+                break
+            case (801...804):
+                condition = "☁️"
+                break
+            default:
+                condition = "⛅️"
+            }
+            button.title  = "\(condition) \(currentWeather.main.temp) ℃"
         }
         
     }
@@ -71,7 +100,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
             
             if let data = data{
-                let currentWeather = try? JSONDecoder().decode(WeatherData.self, from: data)
+                let currentWeather = try? JSONDecoder().decode(WeatherResponse.self, from: data)
                 DispatchQueue.main.async {
                     self.updateButton(currentWeather: currentWeather!)
                 }
@@ -81,12 +110,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         task.resume()
     }
 
-    struct WeatherData: Decodable {
+    struct WeatherResponse: Decodable {
         struct MainData: Decodable {
             let temp: Double
         }
         
+        struct WeatherData: Decodable {
+            let id: Int
+        }
+        
         let main: MainData
+        let weather: [WeatherData]
     }
     
     func readConfig() -> Dictionary<String, String>? {
