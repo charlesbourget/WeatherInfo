@@ -13,6 +13,8 @@
 		560815B826321F270014A5ED /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 560815B726321F270014A5ED /* Preview Assets.xcassets */; };
 		560815BB26321F270014A5ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560815B926321F270014A5ED /* Main.storyboard */; };
 		560815DC26330DAF0014A5ED /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 560815DB26330DAF0014A5ED /* Config.plist */; };
+		562CD28126371D0900E5D1B6 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562CD28026371D0900E5D1B6 /* MenuBar.swift */; };
+		56C923DC2635DA95000818CB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C923DB2635DA95000818CB /* AppState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		560815BC26321F270014A5ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		560815BD26321F270014A5ED /* WeatherInfo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherInfo.entitlements; sourceTree = "<group>"; };
 		560815DB26330DAF0014A5ED /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		562CD28026371D0900E5D1B6 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		56C923DB2635DA95000818CB /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,8 @@
 			children = (
 				560815B026321F260014A5ED /* AppDelegate.swift */,
 				560815B226321F260014A5ED /* ContentView.swift */,
+				56C923DB2635DA95000818CB /* AppState.swift */,
+				562CD28026371D0900E5D1B6 /* MenuBar.swift */,
 				560815B426321F270014A5ED /* Assets.xcassets */,
 				560815B926321F270014A5ED /* Main.storyboard */,
 				560815BC26321F270014A5ED /* Info.plist */,
@@ -152,7 +158,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56C923DC2635DA95000818CB /* AppState.swift in Sources */,
 				560815B326321F260014A5ED /* ContentView.swift in Sources */,
+				562CD28126371D0900E5D1B6 /* MenuBar.swift in Sources */,
 				560815B126321F260014A5ED /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

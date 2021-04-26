@@ -3,22 +3,19 @@ import SwiftUI
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-    
+
+    @ObservedObject var state: AppState
     var popover: NSPopover!
     var statusBarItem: NSStatusItem!
-    var apiKey: String!
+    var menuBar: MenuBar!
+    
+    override init() {
+        // TODO: Load initial city from config or device location
+        state = AppState(city: "montreal")
+    }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let buttonTitle = "⛅️ -- ℃"
-        
-        let contentView = ContentView()
-        let popover = NSPopover()
-        
-        popover.contentSize = NSSize(width: 400, height: 400)
-        popover.behavior = .transient
-        popover.contentViewController = NSHostingController(rootView: contentView)
-        
-        self.popover = popover
         
         self.statusBarItem = NSStatusBar.system.statusItem(withLength: CGFloat(NSStatusItem.variableLength))
         if let button = self.statusBarItem.button {
@@ -26,14 +23,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.action = #selector(togglePopover(_:))
         }
         
-        if let config = readConfig() {
-            self.apiKey = config["ApiKey"]
+        if let button = self.statusBarItem.button, let config = readConfig() {
+            menuBar = MenuBar(button: button, apiKey: config["ApiKey"]!, state: state)
         }
         
-        // Force initial fetch of weather and then fetch each 20min
-        refreshWeatherData()
-        let interval = 1200.0
-        Timer.scheduledTimer(timeInterval: interval, target: self,  selector: #selector(refreshWeatherData), userInfo: nil, repeats: true)
+        let contentView = ContentView(state: state, menuBar: menuBar)
+        let popover = NSPopover()
+        
+        popover.contentSize = NSSize(width: 400, height: 400)
+        popover.behavior = .transient
+        popover.contentViewController = NSHostingController(rootView: contentView)
+        
+        self.popover = popover
     }
     
     @objc func togglePopover(_ sender: AnyObject?) {
@@ -45,81 +46,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 self.popover.contentViewController?.view.window?.becomeKey()
             }
         }
-    }
-    
-    func updateButton(currentWeather: WeatherResponse) {
-        if let button = self.statusBarItem.button {
-            let condition: String
-            switch currentWeather.weather[0].id {
-            case (200...299):
-                condition = "⛈"
-                break
-            case (300...399):
-                condition = "🌦"
-                break
-            case 511:
-                condition = "🧊"
-                break
-            case (500...599):
-                condition = "🌧"
-                break
-            case (600...699):
-                condition = "❄️"
-                break
-            case (700...799):
-                condition = "🌫"
-                break
-            case 800:
-                condition = "☀️"
-                break
-            case (801...804):
-                condition = "☁️"
-                break
-            default:
-                condition = "⛅️"
-            }
-            button.title  = "\(condition) \(currentWeather.main.temp) ℃"
-        }
-        
-    }
-    
-    @objc func refreshWeatherData() {
-        let city = "montreal"
-        let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(self.apiKey!)&units=metric")!
-        
-        let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-            if let error = error {
-                print("Error with fetching weather from API: \(error)")
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                print("Error with the response, unexpected status code: \(response!)")
-                return
-            }
-            
-            if let data = data{
-                let currentWeather = try? JSONDecoder().decode(WeatherResponse.self, from: data)
-                DispatchQueue.main.async {
-                    self.updateButton(currentWeather: currentWeather!)
-                }
-            }
-        })
-        
-        task.resume()
-    }
-    
-    struct WeatherResponse: Decodable {
-        struct MainData: Decodable {
-            let temp: Double
-        }
-        
-        struct WeatherData: Decodable {
-            let id: Int
-        }
-        
-        let main: MainData
-        let weather: [WeatherData]
     }
     
     func readConfig() -> Dictionary<String, String>? {

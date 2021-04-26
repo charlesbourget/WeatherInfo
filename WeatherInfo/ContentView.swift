@@ -1,14 +1,29 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        Text("Hello, World!")
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+    private var menuBar: MenuBar
+    @ObservedObject private var state: AppState
+    @State private var city = ""
+    @State private var isEditing = false
+    
+    init(state: AppState, menuBar: MenuBar) {
+        self.state = state
+        self.menuBar = menuBar
+        self.city = state.getCity()
     }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+    
+    var body: some View {
+        TextField(
+                "City",
+                 text: $city
+            ) { isEditing in
+                self.isEditing = isEditing
+            } onCommit: {
+                self.state.setCity(city: city)
+                menuBar.refreshWeatherData()
+            }
+            .disableAutocorrection(true)
+        Text("\(state.getCity())")
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
