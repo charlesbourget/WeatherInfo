@@ -3,10 +3,16 @@ import Foundation
 class AppState: ObservableObject {
     @Published var city: String
     @Published var lastRefresh: String
+    @Published var apiKey: String
     
     init() {
         city = ""
         lastRefresh = ""
+        if let apiKey = UserDefaults.standard.string(forKey: "APIKey") {
+            self.apiKey = apiKey
+        } else {
+            self.apiKey = ""
+        }
     }
     
     func getCity() -> String {
@@ -29,5 +35,14 @@ class AppState: ObservableObject {
     
     func getLastRefresh() -> String {
         return self.lastRefresh
+    }
+    
+    func setAPIKey(apiKey: String) {
+        self.apiKey = apiKey
+        UserDefaults.standard.setValue(self.apiKey, forKey: "APIKey")
+    }
+    
+    func getAPIKey() -> String {
+        return apiKey
     }
 }

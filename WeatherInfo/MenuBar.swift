@@ -5,15 +5,13 @@ import AppKit
 class MenuBar {
     
     private var button: NSStatusBarButton
-    private var apiKey: String
     private var state: AppState
     
     private var latitude: Double
     private var longitude: Double
     
-    init (button: NSStatusBarButton, apiKey: String, state: AppState) {
+    init (button: NSStatusBarButton, state: AppState) {
         self.button = button
-        self.apiKey = apiKey
         self.state = state
         latitude = 0
         longitude = 0
@@ -30,7 +28,7 @@ class MenuBar {
     }
     
     @objc func refreshWeatherData() {
-        let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(apiKey)&units=metric")!
+        let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(state.getAPIKey())&units=metric")!
         
         let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
             if let error = error {
@@ -54,9 +52,9 @@ class MenuBar {
                 let currentWeather = try! JSONDecoder().decode(WeatherResponse.self, from: data)
                 DispatchQueue.main.async {
                     self.updateButton(currentWeather: currentWeather)
+                    self.state.setCity(city: "\(currentWeather.name), \(currentWeather.sys.country)")
+                    self.state.updateLastRefresh()
                 }
-                self.state.setCity(city: "\(currentWeather.name), \(currentWeather.sys.country)")
-                self.state.updateLastRefresh()
             }
         })
         

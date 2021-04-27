@@ -30,8 +30,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, CLLocationManagerDelegate {
             button.action = #selector(togglePopover(_:))
         }
         
-        if let button = self.statusBarItem.button, let config = readConfig() {
-            menuBar = MenuBar(button: button, apiKey: config["ApiKey"]!, state: state)
+        if let button = self.statusBarItem.button {
+            menuBar = MenuBar(button: button, state: state)
         }
         
         let contentView = ContentView(state: state, menuBar: menuBar)
@@ -52,17 +52,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, CLLocationManagerDelegate {
                 self.popover.contentViewController?.view.window?.becomeKey()
             }
         }
-    }
-    
-    func readConfig() -> Dictionary<String, String>? {
-        var configDict: Dictionary<String, String>?
-        if  let path = Bundle.main.path(forResource: "Config", ofType: "plist") {
-            if let dict = NSDictionary(contentsOfFile: path) as? Dictionary<String, String> {
-                configDict = dict
-            }
-        }
-        
-        return configDict
     }
     
     func startMySignificantLocationChanges() {
