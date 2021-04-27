@@ -11,7 +11,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     override init() {
         // TODO: Load initial city from config or device location
-        state = AppState(city: "montreal")
+        state = AppState()
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
