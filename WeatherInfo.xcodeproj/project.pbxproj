@@ -14,6 +14,7 @@
 		560815BB26321F270014A5ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560815B926321F270014A5ED /* Main.storyboard */; };
 		560815DC26330DAF0014A5ED /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 560815DB26330DAF0014A5ED /* Config.plist */; };
 		562CD28126371D0900E5D1B6 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562CD28026371D0900E5D1B6 /* MenuBar.swift */; };
+		569A113A263858D000BA3576 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 569A113C263858D000BA3576 /* Localizable.strings */; };
 		56C923DC2635DA95000818CB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C923DB2635DA95000818CB /* AppState.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,8 @@
 		560815BD26321F270014A5ED /* WeatherInfo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherInfo.entitlements; sourceTree = "<group>"; };
 		560815DB26330DAF0014A5ED /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		562CD28026371D0900E5D1B6 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		569A113B263858D000BA3576 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		569A113D263858E300BA3576 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		56C923DB2635DA95000818CB /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,6 +74,7 @@
 				560815DB26330DAF0014A5ED /* Config.plist */,
 				560815BD26321F270014A5ED /* WeatherInfo.entitlements */,
 				560815B626321F270014A5ED /* Preview Content */,
+				569A113C263858D000BA3576 /* Localizable.strings */,
 			);
 			path = WeatherInfo;
 			sourceTree = "<group>";
@@ -112,7 +116,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					560815AC26321F260014A5ED = {
 						CreatedOnToolsVersion = 12.4;
@@ -126,6 +130,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"fr-CA",
 			);
 			mainGroup = 560815A426321F260014A5ED;
 			packageReferences = (
@@ -144,6 +149,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				569A113A263858D000BA3576 /* Localizable.strings in Resources */,
 				560815DC26330DAF0014A5ED /* Config.plist in Resources */,
 				560815BB26321F270014A5ED /* Main.storyboard in Resources */,
 				560815B826321F270014A5ED /* Preview Assets.xcassets in Resources */,
@@ -176,6 +182,15 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
+		569A113C263858D000BA3576 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				569A113B263858D000BA3576 /* en */,
+				569A113D263858E300BA3576 /* fr-CA */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -183,6 +198,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -244,6 +260,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -301,6 +318,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ENTITLEMENTS = WeatherInfo/WeatherInfo.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"WeatherInfo/Preview Content\"";
@@ -326,6 +344,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ENTITLEMENTS = WeatherInfo/WeatherInfo.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"WeatherInfo/Preview Content\"";
