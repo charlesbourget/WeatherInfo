@@ -5,11 +5,7 @@ class AppState: ObservableObject {
     @Published var lastRefresh: String
     
     init() {
-        if let setCity = UserDefaults.standard.string(forKey: "City") {
-            self.city = setCity
-        } else {
-            self.city = "montreal"
-        }
+        city = ""
         lastRefresh = ""
     }
     
@@ -19,7 +15,6 @@ class AppState: ObservableObject {
     
     func setCity(city: String) {
         self.city = city
-        UserDefaults.standard.setValue(self.city, forKey: "City")
     }
     
     func updateLastRefresh() {

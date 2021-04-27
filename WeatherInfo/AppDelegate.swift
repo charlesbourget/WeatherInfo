@@ -1,13 +1,15 @@
 import Cocoa
 import SwiftUI
+import CoreLocation
 
 @main
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, CLLocationManagerDelegate {
     
     @ObservedObject var state: AppState
     var popover: NSPopover!
     var statusBarItem: NSStatusItem!
     var menuBar: MenuBar!
+    let manager = CLLocationManager()
     
     override init() {
         // TODO: Load initial city from config or device location
@@ -15,6 +17,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        manager.requestAlwaysAuthorization()
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        startMySignificantLocationChanges()
+        
         let buttonTitle = "⛅️ -- ℃"
         
         self.statusBarItem = NSStatusBar.system.statusItem(withLength: CGFloat(NSStatusItem.variableLength))
@@ -56,6 +63,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         return configDict
+    }
+    
+    func startMySignificantLocationChanges() {
+        if !CLLocationManager.significantLocationChangeMonitoringAvailable() {
+            // The device does not support this service.
+            return
+        }
+        manager.startMonitoringSignificantLocationChanges()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation:CLLocation = locations[0] as CLLocation
+        
+        menuBar.setLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+    }
+        
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error){
+        print("Error \(error)")
     }
     
 }

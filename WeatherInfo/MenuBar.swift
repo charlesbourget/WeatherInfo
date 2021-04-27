@@ -8,20 +8,29 @@ class MenuBar {
     private var apiKey: String
     private var state: AppState
     
+    private var latitude: Double
+    private var longitude: Double
+    
     init (button: NSStatusBarButton, apiKey: String, state: AppState) {
         self.button = button
         self.apiKey = apiKey
         self.state = state
+        latitude = 0
+        longitude = 0
         
-        // Force initial fetch of weather and then fetch each 20min
-        refreshWeatherData()
+        // Data is refreshed on location change or each 20 minutes
         let interval = 1200.0
         Timer.scheduledTimer(timeInterval: interval, target: self,  selector: #selector(refreshWeatherData), userInfo: nil, repeats: true)
     }
     
+    func setLocation(latitude: Double, longitude: Double) {
+        self.latitude = latitude
+        self.longitude = longitude
+        refreshWeatherData()
+    }
+    
     @objc func refreshWeatherData() {
-        let city = state.getCity()
-        let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(self.apiKey)&units=metric")!
+        let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(apiKey)&units=metric")!
         
         let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
             if let error = error {
@@ -42,11 +51,12 @@ class MenuBar {
             }
             
             if let data = data{
-                let currentWeather = try? JSONDecoder().decode(WeatherResponse.self, from: data)
+                let currentWeather = try! JSONDecoder().decode(WeatherResponse.self, from: data)
                 DispatchQueue.main.async {
-                    self.updateButton(currentWeather: currentWeather!)
-                    self.state.updateLastRefresh()
+                    self.updateButton(currentWeather: currentWeather)
                 }
+                self.state.setCity(city: "\(currentWeather.name), \(currentWeather.sys.country)")
+                self.state.updateLastRefresh()
             }
         })
         
@@ -112,11 +122,13 @@ class MenuBar {
         struct SysData: Decodable {
             let sunrise: Int64
             let sunset: Int64
+            let country: String
         }
         
         let main: MainData
         let weather: [WeatherData]
         let sys: SysData
+        let name: String
     }
     
     func alertDialog(alertText: String){
