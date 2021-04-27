@@ -55,12 +55,17 @@ class MenuBar {
     
     func updateButton(currentWeather: WeatherResponse) {
         let condition: String
+        let isNight = checkIsNight(sunrise: currentWeather.sys.sunrise, sunset: currentWeather.sys.sunset);
         switch currentWeather.weather[0].id {
         case (200...299):
             condition = "⛈"
             break
         case (300...399):
-            condition = "🌦"
+            if (isNight) {
+                condition = "🌧"
+            } else {
+                condition = "🌦"
+            }
             break
         case 511:
             condition = "🧊"
@@ -75,7 +80,11 @@ class MenuBar {
             condition = "🌫"
             break
         case 800:
-            condition = "☀️"
+            if (isNight) {
+                condition = "🌙"
+            } else {
+                condition = "☀️"
+            }
             break
         case (801...804):
             condition = "☁️"
@@ -84,6 +93,11 @@ class MenuBar {
             condition = "⛅️"
         }
         button.title  = "\(condition) \(currentWeather.main.temp) ℃"
+    }
+    
+    func checkIsNight(sunrise: Int64, sunset: Int64) -> Bool {
+        let currentTimestamp = Int64(Date().timeIntervalSince1970)
+        return currentTimestamp < sunrise || currentTimestamp > sunset
     }
     
     struct WeatherResponse: Decodable {
@@ -95,8 +109,14 @@ class MenuBar {
             let id: Int
         }
         
+        struct SysData: Decodable {
+            let sunrise: Int64
+            let sunset: Int64
+        }
+        
         let main: MainData
         let weather: [WeatherData]
+        let sys: SysData
     }
     
     func alertDialog(alertText: String){
