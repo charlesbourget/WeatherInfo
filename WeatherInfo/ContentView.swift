@@ -13,9 +13,10 @@ struct ContentView: View {
     }
     
     var body: some View {
-        TextField(
+        VStack {
+            TextField(
                 "City",
-                 text: $city
+                text: $city
             ) { isEditing in
                 self.isEditing = isEditing
             } onCommit: {
@@ -23,7 +24,20 @@ struct ContentView: View {
                 menuBar.refreshWeatherData()
             }
             .disableAutocorrection(true)
-        Text("\(state.getCity())")
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding()
+            HStack {
+                Button("Refresh data") {
+                    menuBar.refreshWeatherData()
+                }.padding()
+                Button("Close app") {
+                    NSApplication.shared.terminate(self)
+                }.padding()
+                
+            }
+            Text("Viewing weather for : \(state.getCity().capitalized)")
+                .font(.caption)
+            Text("Last refresh : \(state.getLastRefresh())")
+                .font(.caption)
+        }.padding()
     }
 }

@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import AppKit
 
 class MenuBar {
     
@@ -29,8 +30,14 @@ class MenuBar {
                 return
             }
             
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                print("Error with the response, unexpected status code: \(response!)")
+            if let httpResponse = response as? HTTPURLResponse, !(200...299).contains(httpResponse.statusCode) {
+                if httpResponse.statusCode == 404 {
+                    DispatchQueue.main.async {
+                        self.alertDialog(alertText: "City not found")
+                    }
+                } else {
+                    print("Error with the response, unexpected status code: \(response!)")
+                }
                 return
             }
             
@@ -38,6 +45,7 @@ class MenuBar {
                 let currentWeather = try? JSONDecoder().decode(WeatherResponse.self, from: data)
                 DispatchQueue.main.async {
                     self.updateButton(currentWeather: currentWeather!)
+                    self.state.updateLastRefresh()
                 }
             }
         })
@@ -89,6 +97,14 @@ class MenuBar {
         
         let main: MainData
         let weather: [WeatherData]
+    }
+    
+    func alertDialog(alertText: String){
+        let alert = NSAlert()
+        alert.messageText = alertText
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "OK")
+        alert.runModal()
     }
     
 }

@@ -3,7 +3,7 @@ import SwiftUI
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-
+    
     @ObservedObject var state: AppState
     var popover: NSPopover!
     var statusBarItem: NSStatusItem!
@@ -30,7 +30,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let contentView = ContentView(state: state, menuBar: menuBar)
         let popover = NSPopover()
         
-        popover.contentSize = NSSize(width: 400, height: 400)
         popover.behavior = .transient
         popover.contentViewController = NSHostingController(rootView: contentView)
         
