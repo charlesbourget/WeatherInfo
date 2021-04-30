@@ -16,8 +16,7 @@ jobs:
       - name: Build
         run: xcodebuild
       - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v0.1.5
         with:
           files: build/Release/WeatherInfo.app
         env:
