@@ -5,7 +5,7 @@ struct ContentView: View {
     
     @ObservedObject private var state: AppState
     @State private var isEditing = false
-    @State private var apiKey: String
+    @State private var apiKey: String = ""
     
     init(state: AppState, menuBar: MenuBar, apiKey: String) {
         self.state = state
