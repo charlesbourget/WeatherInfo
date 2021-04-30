@@ -28,6 +28,9 @@ class MenuBar {
     }
     
     @objc func refreshWeatherData() {
+        if (latitude == 0 && longitude == 0) {
+            alertDialog(alertText: "App probably doesn't have location access. Go to System Preferences -> Security & Privacy -> Location Services")
+        }
         let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(state.getAPIKey())&units=metric")!
         
         let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
@@ -131,7 +134,7 @@ class MenuBar {
     
     func alertDialog(alertText: String){
         let alert = NSAlert()
-        alert.messageText = alertText
+        alert.messageText = NSLocalizedString(alertText, comment: "")
         alert.alertStyle = .warning
         alert.addButton(withTitle: "OK")
         alert.runModal()
