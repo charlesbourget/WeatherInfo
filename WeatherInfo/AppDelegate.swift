@@ -34,7 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, CLLocationManagerDelegate {
             menuBar = MenuBar(button: button, state: state)
         }
         
-        let contentView = ContentView(state: state, menuBar: menuBar)
+        let contentView = ContentView(state: state, menuBar: menuBar, apiKey: state.getAPIKey())
         let popover = NSPopover()
         
         popover.behavior = .transient

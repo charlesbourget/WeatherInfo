@@ -7,10 +7,10 @@ struct ContentView: View {
     @State private var isEditing = false
     @State private var apiKey: String
     
-    init(state: AppState, menuBar: MenuBar) {
+    init(state: AppState, menuBar: MenuBar, apiKey: String) {
         self.state = state
         self.menuBar = menuBar
-        self.apiKey = state.getAPIKey()
+        self.apiKey = apiKey
     }
     
     var body: some View {
