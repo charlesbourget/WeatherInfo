@@ -52,7 +52,7 @@ class MenuBar {
                 let currentWeather = try! JSONDecoder().decode(WeatherResponse.self, from: data)
                 DispatchQueue.main.async {
                     self.updateButton(currentWeather: currentWeather)
-                    self.state.setCity(city: "\(currentWeather.name), \(currentWeather.sys.country)")
+                    self.state.setCity(city: "\(currentWeather.name), \(currentWeather.sys.country ?? "")")
                     self.state.updateLastRefresh()
                 }
             }
@@ -120,7 +120,7 @@ class MenuBar {
         struct SysData: Decodable {
             let sunrise: Int64
             let sunset: Int64
-            let country: String
+            let country: String?
         }
         
         let main: MainData
