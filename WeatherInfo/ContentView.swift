@@ -10,7 +10,7 @@ struct ContentView: View {
     init(state: AppState, menuBar: MenuBar) {
         self.state = state
         self.menuBar = menuBar
-        self.apiKey = state.apiKey
+        self.apiKey = state.getAPIKey()
     }
     
     var body: some View {
