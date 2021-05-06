@@ -2,17 +2,17 @@ import SwiftUI
 
 struct ContentView: View {
     private var menuBar: MenuBar
-    
+
     @ObservedObject private var state: AppState
     @State private var isEditing = false
     @State private var apiKey: String = ""
-    
+
     init(state: AppState, menuBar: MenuBar, apiKey: String) {
         self.state = state
         self.menuBar = menuBar
         self.apiKey = apiKey
     }
-    
+
     var body: some View {
         VStack {
             HStack {
@@ -30,10 +30,9 @@ struct ContentView: View {
             VStack {
                 Text("Set API Key")
                 TextField("API key",
-                          text: $apiKey
-                ) { isEditing in
+                          text: $apiKey) { isEditing in
                     self.isEditing = isEditing
-                }  onCommit: {
+                } onCommit: {
                     self.state.setAPIKey(apiKey: self.apiKey)
                 }
             }.padding()
