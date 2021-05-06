@@ -5,4 +5,4 @@
 "Set API Key" = "Entrer clée d'API";
 "API key" = "Clée d'API";
 "App probably doesn't have location access. Go to System Preferences -> Security & Privacy -> Location Services" = "L'app n'a probablement pas accès aux services de localisation. Activer dans Préférences Systèmes -> Sécurité et confidentialité -> Localisation";
-"City not found" = "Ville introuvable"
+"City not found" = "Ville introuvable";
