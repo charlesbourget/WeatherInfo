@@ -35,7 +35,7 @@ class MenuBar {
         let task = URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
             if let error = error {
                 DispatchQueue.main.async {
-                    self.alertDialog(alertText: "Error with fetching weather from API: \(error)")
+                    alertDialog(alertText: "Error with fetching weather from API: \(error)")
                 }
                 self.refreshWeatherData()
                 return
@@ -45,15 +45,15 @@ class MenuBar {
                 switch httpResponse.statusCode {
                 case 404:
                     DispatchQueue.main.async {
-                        self.alertDialog(alertText: "City not found")
+                        alertDialog(alertText: "City not found")
                     }
                 case 401:
                     DispatchQueue.main.async {
-                        self.alertDialog(alertText: "Authentification problems. API Key is not valid.")
+                        alertDialog(alertText: "Authentification problems. API Key is not valid.")
                     }
                 default:
                     DispatchQueue.main.async {
-                        self.alertDialog(alertText: "Error with the response, unexpected status code: \(response!)")
+                        alertDialog(alertText: "Error with the response, unexpected status code: \(response!)")
                     }
                 }
 
@@ -131,13 +131,5 @@ class MenuBar {
         let weather: [WeatherData]
         let sys: SysData
         let name: String
-    }
-
-    func alertDialog(alertText: String) {
-        let alert = NSAlert()
-        alert.messageText = NSLocalizedString(alertText, comment: "")
-        alert.alertStyle = .warning
-        alert.addButton(withTitle: "OK")
-        alert.runModal()
     }
 }

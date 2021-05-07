@@ -65,6 +65,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, CLLocationManagerDelegate {
     }
 
     func locationManager(_: CLLocationManager, didFailWithError error: Error) {
-        print("Error \(error)")
+        alertDialog(alertText: "Error \(error)")
     }
 }

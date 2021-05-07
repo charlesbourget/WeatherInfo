@@ -8,4 +8,5 @@
 "City not found" = "City not found";
 "Authentification problems. API Key is not valid." = "Authentification problems. API Key is not valid.";
 "Error with fetching weather from API: %@" = "Error with fetching weather from API: %@";
-"Error with the response, unexpected status code: %@" = "Error with the response, unexpected status code: %@"
+"Error with the response, unexpected status code: %@" = "Error with the response, unexpected status code: %@";
+"Error %@" = "Error %@";

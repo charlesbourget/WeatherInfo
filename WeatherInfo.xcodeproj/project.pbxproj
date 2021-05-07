@@ -14,6 +14,7 @@
 		560815BB26321F270014A5ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560815B926321F270014A5ED /* Main.storyboard */; };
 		562CD28126371D0900E5D1B6 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562CD28026371D0900E5D1B6 /* MenuBar.swift */; };
 		569A113A263858D000BA3576 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 569A113C263858D000BA3576 /* Localizable.strings */; };
+		56B686372644BEBB009397F2 /* AlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B686362644BEBB009397F2 /* AlertUtil.swift */; };
 		56C923DC2635DA95000818CB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C923DB2635DA95000818CB /* AppState.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		562CD28026371D0900E5D1B6 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		569A113B263858D000BA3576 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		569A113D263858E300BA3576 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		56B686362644BEBB009397F2 /* AlertUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUtil.swift; sourceTree = "<group>"; };
 		56C923DB2635DA95000818CB /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +68,7 @@
 				560815B226321F260014A5ED /* ContentView.swift */,
 				56C923DB2635DA95000818CB /* AppState.swift */,
 				562CD28026371D0900E5D1B6 /* MenuBar.swift */,
+				56B686362644BEBB009397F2 /* AlertUtil.swift */,
 				560815B426321F270014A5ED /* Assets.xcassets */,
 				560815B926321F270014A5ED /* Main.storyboard */,
 				560815BC26321F270014A5ED /* Info.plist */,
@@ -163,6 +166,7 @@
 				56C923DC2635DA95000818CB /* AppState.swift in Sources */,
 				560815B326321F260014A5ED /* ContentView.swift in Sources */,
 				562CD28126371D0900E5D1B6 /* MenuBar.swift in Sources */,
+				56B686372644BEBB009397F2 /* AlertUtil.swift in Sources */,
 				560815B126321F260014A5ED /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
