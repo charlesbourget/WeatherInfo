@@ -64,7 +64,12 @@ class MenuBar {
                 let currentWeather = try! JSONDecoder().decode(WeatherResponse.self, from: data)
                 DispatchQueue.main.async {
                     self.updateButton(currentWeather: currentWeather)
-                    self.state.setCity(city: "\(currentWeather.name), \(currentWeather.sys.country ?? "")")
+                    if let country = currentWeather.sys.country {
+                        self.state.setCity(city: "\(currentWeather.name), \(country)")
+                    } else {
+                        self.state.setCity(city: "\(currentWeather.name)")
+                    }
+
                     self.state.updateLastRefresh()
                 }
             }
