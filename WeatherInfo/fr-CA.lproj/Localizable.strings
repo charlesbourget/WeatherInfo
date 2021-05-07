@@ -6,3 +6,6 @@
 "API key" = "Clée d'API";
 "App probably doesn't have location access. Go to System Preferences -> Security & Privacy -> Location Services" = "L'app n'a probablement pas accès aux services de localisation. Activer dans Préférences Systèmes -> Sécurité et confidentialité -> Localisation";
 "City not found" = "Ville introuvable";
+"Authentification problems. API Key is not valid." = "Problème d'authentification. La clée d'API n'est pas valide.";
+"Error with fetching weather from API: %@" = "Erreur lors de l'appel à l'API de météo: %@";
+"Error with the response, unexpected status code: %@" = "Erreur avec la réponse du serveur: %@";
