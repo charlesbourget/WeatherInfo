@@ -33,7 +33,7 @@ class MenuBar {
         let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(state.getAPIKey())&units=metric")!
 
         let task = URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
-            if let error = error {
+            if error != nil {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 120.0) {
                     self.refreshWeatherData()
                 }
