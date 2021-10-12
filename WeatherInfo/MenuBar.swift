@@ -34,10 +34,9 @@ class MenuBar {
 
         let task = URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
             if let error = error {
-                DispatchQueue.main.async {
-                    alertDialog(alertText: "Error with fetching weather from API: \(error)")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 120.0) {
+                    self.refreshWeatherData()
                 }
-                self.refreshWeatherData()
                 return
             }
 
@@ -63,7 +62,7 @@ class MenuBar {
             if let data = data {
                 let currentWeather = try! JSONDecoder().decode(WeatherResponse.self, from: data)
                 DispatchQueue.main.async {
-                    self.updateButton(currentWeather: currentWeather)
+                    self.button.title = self.getButtonText(currentWeather: currentWeather)
                     if let country = currentWeather.sys.country {
                         self.state.setCity(city: "\(currentWeather.name), \(country)")
                     } else {
@@ -78,7 +77,7 @@ class MenuBar {
         task.resume()
     }
 
-    func updateButton(currentWeather: WeatherResponse) {
+    func getButtonText(currentWeather: WeatherResponse) -> String {
         let condition: String
         let isNight = checkIsNight(sunrise: currentWeather.sys.sunrise, sunset: currentWeather.sys.sunset)
         switch currentWeather.weather[0].id {
@@ -109,7 +108,7 @@ class MenuBar {
         default:
             condition = "⛅️"
         }
-        button.title = "\(condition) \(currentWeather.main.temp) ℃"
+        return "\(condition) \(currentWeather.main.temp) ℃"
     }
 
     func checkIsNight(sunrise: Int64, sunset: Int64) -> Bool {
