@@ -26,7 +26,6 @@ class MenuBar {
             }
             completion(NSBackgroundActivityScheduler.Result.finished)
         }
-        print(activity)
     }
 
     func setLocation(latitude: Double, longitude: Double) {
