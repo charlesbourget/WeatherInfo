@@ -16,17 +16,26 @@ class MenuBar {
         longitude = 0
 
         // Data is refreshed on location change or each 20 minutes
-        let interval = 1200.0
-        Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(refreshWeatherData), userInfo: nil, repeats: true)
+        let activity = NSBackgroundActivityScheduler(identifier: "com.cbourget.WeatherInfo.contentRefresh")
+        activity.repeats = true
+        activity.interval = 20 * 60
+        activity.qualityOfService = .background
+        activity.schedule { (completion: NSBackgroundActivityScheduler.CompletionHandler) in
+            DispatchQueue.main.async {
+                self.refreshWeatherData(ttl: 0)
+            }
+            completion(NSBackgroundActivityScheduler.Result.finished)
+        }
+        print(activity)
     }
 
     func setLocation(latitude: Double, longitude: Double) {
         self.latitude = latitude
         self.longitude = longitude
-        refreshWeatherData()
+        refreshWeatherData(ttl: 0)
     }
 
-    @objc func refreshWeatherData() {
+    @objc func refreshWeatherData(ttl: Int8) {
         if latitude == 0, longitude == 0 {
             alertDialog(alertText: "App probably doesn't have location access. Go to System Preferences -> Security & Privacy -> Location Services")
         }
@@ -34,9 +43,12 @@ class MenuBar {
 
         let task = URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
             if error != nil {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 120.0) {
-                    self.refreshWeatherData()
+                if ttl == 0 {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 120.0) {
+                        self.refreshWeatherData(ttl: 1)
+                    }
                 }
+                // After two tries the error is probably a network error. Nothing we can do but fail silently and wait for next scheduled refresh
                 return
             }
 

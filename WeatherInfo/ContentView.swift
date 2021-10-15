@@ -17,7 +17,7 @@ struct ContentView: View {
         VStack {
             HStack {
                 Button("Refresh data") {
-                    menuBar.refreshWeatherData()
+                    menuBar.refreshWeatherData(ttl: 0)
                 }.padding()
                 Button("Close app") {
                     NSApplication.shared.terminate(self)
