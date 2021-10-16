@@ -15,11 +15,13 @@ class MenuBar {
         latitude = 0
         longitude = 0
 
-        // Data is refreshed on location change or each 20 minutes
+        // Data is refreshed on location change or each 10 minutes
+        let interval: Double = 10 * 60
         let activity = NSBackgroundActivityScheduler(identifier: "com.cbourget.WeatherInfo.contentRefresh")
         activity.repeats = true
-        activity.interval = 20 * 60
-        activity.qualityOfService = .background
+        activity.interval = interval
+        activity.tolerance = interval / 4
+        activity.qualityOfService = .utility
         activity.schedule { (completion: NSBackgroundActivityScheduler.CompletionHandler) in
             DispatchQueue.main.async {
                 self.refreshWeatherData(ttl: 0)
