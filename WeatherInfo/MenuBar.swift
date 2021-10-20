@@ -121,7 +121,7 @@ class MenuBar {
         default:
             condition = "⛅️"
         }
-        return "\(condition) \(currentWeather.main.temp) ℃"
+        return "\(condition) \(Int(currentWeather.main.temp.rounded())) ℃"
     }
 
     func checkIsNight(sunrise: Int64, sunset: Int64) -> Bool {
